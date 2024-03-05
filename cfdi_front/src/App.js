@@ -64,26 +64,56 @@ function hola(){
 
 
 
-const MyComponent = () => {
-    const [datos, setDatos] = useState(null);
+// const MyComponent = () => {
+//     const [datos, setDatos] = useState([]);
+//
+//     const fetchData = () => {
+//         fetch('http://localhost:8080/api/hola')
+//             .then(response => response.json())
+//             .then(data => {
+//                 setDatos(data);
+//                 console.log(data);
+//             })
+//             .catch(error => {
+//                 console.error('Error al obtener datos:', error);
+//             });
+//     };
+//
+//     return (
+//         <div>
+//             <h1>My Component</h1>
+//             <button onClick={fetchData}>Obtener Datos</button>
+//             {/* Agrega este botón */}
+//             <div>
+//                 <h2>Users</h2>
+//                 <ul>
+//                     {users.map(user => (
+//                         <li key={user.id}>{user.name}</li>
+//                     ))}
+//                 </ul>
+//             </div>
+//         </div>
+//     );
+// };
 
-    const fetchData = () => {
+const MyComponent = () => {
+    const [mensaje, setMensaje] = useState('');
+
+    useEffect(() => {
         fetch('http://localhost:8080/api/hola')
             .then(response => response.json())
             .then(data => {
-                setDatos(data);
-                console.log(data);
+                setMensaje(data.mensaje); // Actualiza el estado con el mensaje obtenido
             })
             .catch(error => {
                 console.error('Error al obtener datos:', error);
             });
-    };
+    }, []);
 
     return (
         <div>
-            <h1>My Component</h1>
-            <h1>{datos}</h1>
-            <button onClick={fetchData}>Obtener Datos</button> {/* Agrega este botón */}
+            <h1>Mi Componente</h1>
+            <p>{mensaje}</p>
         </div>
     );
 };
