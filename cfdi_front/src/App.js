@@ -1,6 +1,27 @@
 import './App.css';
-import React from 'react';
 import { Button} from 'react-bootstrap';
+import React, {useEffect, useState } from 'react';
+import axios from 'axios';
+
+// const MyComponent = () => {
+//     const [data, setData] = useState(null);
+//
+//     const fetchData = async () => {
+//         try {
+//             const response = await axios.get('http://localhost:8080/api/hola');
+//             setData(response.data);
+//         } catch (error) {
+//             console.error('Error al obtener datos:', error);
+//         }
+//     };
+//
+//     return (
+//         <div>
+//             <button onClick={fetchData}>Obtener Datos</button>
+//             {data && <p>{data}</p>}
+//         </div>
+//     );
+// };
 
 function App() {
   return (
@@ -8,7 +29,7 @@ function App() {
         <header className="App-header">
             <Button
                 onClick={() => {
-                    hola()
+                    MyComponent()
                 }}
             >
                 Click click
@@ -41,4 +62,56 @@ function hola(){
 
 }
 
-export default App;
+
+
+const MyComponent = () => {
+    const [datos, setDatos] = useState(null);
+
+    const fetchData = () => {
+        fetch('http://localhost:8080/api/hola')
+            .then(response => response.json())
+            .then(data => {
+                setDatos(data);
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error al obtener datos:', error);
+            });
+    };
+
+    return (
+        <div>
+            <h1>My Component</h1>
+            <h1>{datos}</h1>
+            <button onClick={fetchData}>Obtener Datos</button> {/* Agrega este botón */}
+        </div>
+    );
+};
+
+// const MyComponent = () => {
+//
+//     var datos
+//
+//     useEffect(() => {
+//         fetch('<http://localhost:8080/api/hola>')
+//             .then(response => response.json())
+//             .then(data => {
+//                 datos = data
+//                 console.log(data); // Aquí obtienes la respuesta del servidor
+//             })
+//             .catch(error => {
+//                 console.error('Error al obtener datos:', error);
+//             });
+//     }, []);
+//
+//     return (
+//         <div>
+//             <h1>My Component</h1>
+//             <h1>{datos}</h1>
+//         </div>
+//     );
+//
+// };
+
+// export default App;
+export default MyComponent;
